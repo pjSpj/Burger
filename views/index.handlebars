@@ -1,0 +1,36 @@
+<div> 
+   <h1>Eat Da Burger</h1> 
+   <h2>Please enter a burger in order to eat</h2>
+
+   <form>
+        <div class="form-group">
+            <label for="BurgerInput">Burger</label>
+            <input type="text" class="form-control" id="BurgerInput" placeholder="Please make a burger">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Burger</button>
+   </form>
+
+   <div class = "row">
+       <div class="col-sm-4">
+           <h2>New Order</h2>
+       </div>
+       <div>
+           <ul>
+              {{#each burgers}}
+                {{#unless devoured}}
+                {{> burgers/burger-block }}
+                {{/unless}}
+              {{/each}}
+           </ul>
+       </div>
+       <div>
+           {{#each burgers}}
+            {{#if devoured}}
+                <div>{{id}}.{{burger_name}}</div>
+            {{/if}}
+           {{/each}}           
+       </div>
+   </div>
+
+
+</div>
