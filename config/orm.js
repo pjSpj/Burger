@@ -27,25 +27,36 @@ function objToSql(ob) {
 }
 
 // Object for all our SQL statement functions.
-var orm = {
-  all: function(tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
-    connection.query(queryString, function(err, result) {
-      if (err) {
+let orm={
+  all:function(table,cb){
+    const queryString = "SELECT * FROM " + table + ";";
+    connection.query(queryString,function(err,result){
+      if(err){
         throw err;
       }
       cb(result);
-    });
+    })
   },
-  create: function(table, cols, vals, cb) {
-    var queryString = "INSERT INTO " + table;
 
-    queryString += " (";
-    queryString += cols.toString();
-    queryString += ") ";
-    queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
-    queryString += ") ";
+  create:function(table,cols,vals,cb){
+    const queryString="INSERT INTO" + 
+    table + 
+    "("+
+    cols.toString()+
+    ")"+
+    "VALUES(" +
+    printQuestionMarks(vals.length)+
+    ")";
+
+  // create: function(table, cols, vals, cb) {
+  //   const queryString = "INSERT INTO " + table;
+
+  //   queryString += " (";
+  //   queryString += cols.toString();
+  //   queryString += ") ";
+  //   queryString += "VALUES (";
+  //   queryString += printQuestionMarks(vals.length);
+  //   queryString += ") ";
 
     console.log(queryString);
 
@@ -57,9 +68,9 @@ var orm = {
       cb(result);
     });
   },
-  // An example of objColVals would be {name: panther, sleepy: true}
+
   update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
+    const queryString = "UPDATE " + table;
 
     queryString += " SET ";
     queryString += objToSql(objColVals);
@@ -90,5 +101,4 @@ var orm = {
   }
 };
 
-// Export the orm object for the model (cat.js).
 module.exports = orm;
