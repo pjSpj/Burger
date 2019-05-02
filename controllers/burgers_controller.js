@@ -18,7 +18,7 @@ router.post("/api/burgers",function(req,res){
         ["burger_name","devoured"],
         [req.body.burger_name,req.body.devoured],
         function(result){
-            res.json({id:result.insertid})
+            res.json({id:result.insertId})
         }
     )
 })
