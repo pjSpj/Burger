@@ -1,36 +1,63 @@
-<div> 
-   <h1>Eat Da Burger</h1> 
-   <h2>Please enter a burger in order to eat</h2>
+<div class="container">
 
-   <form>
-        <div class="form-group">
-            <label for="BurgerInput">Burger</label>
-            <input type="text" class="form-control" id="BurgerInput" placeholder="Please make a burger">
+    <div class="jumbotron">
+        <h1>Eat Da burger </h1>
+        <br>
+        <panel>
+            <form class="create-form">
+                <div class="form-group">
+                    <label for="newburger">Order Burger</label>
+                    <input type="text" id="newburger" name="burger">
+                    <button type="submit" class="btn btn-success" id="addburger">
+                        Add Burger
+                    </button>
+                </div>
+            </form>
+        </panel>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="leftside"><strong>Burger List</strong>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        {{#each burgers}}
+                        {{#unless devoured}}
+                            <span><strong> {{this.id}} - {{this.burger_name}}</strong></span>
+                            <button type="button" class="eatburger btn btn-warning" id="eatbutton" data-id="{{this.id}}"
+                                data-newDevoured="{{devour}}">Devour</button>
+                            <hr>
+                        {{/unless}}
+                        {{/each}}
+                    </ul>
+
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Add Burger</button>
-   </form>
-
-   <div class = "row">
-       <div class="col-sm-4">
-           <h2>New Order</h2>
-       </div>
-       <div>
-           <ul>
-              {{#each burgers}}
-                {{#unless devoured}}
-                {{> burgers/burger-block }}
-                {{/unless}}
-              {{/each}}
-           </ul>
-       </div>
-       <div>
-           {{#each burgers}}
-            {{#if devoured}}
-                <div>{{id}}.{{burger_name}}</div>
-            {{/if}}
-           {{/each}}           
-       </div>
-   </div>
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" id="rightside"><strong>Burger is Ready for Pick Up</strong>
+                    <p>Remove order from pick up when delivered</p>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        {{#each burgers}}
+                        {{#if devoured}}
+                        <span><strong> {{this.id}} - {{this.burger_name}}</strong></span>
+                        <button type="button" class="trashburger btn " id="trashbutton" data-id="{{this.id}}"
+                            data-newDevoured="{{devour}}">Delete</button>
+                        <hr>
+                        {{/if}}
+                        {{/each}}
+                    </ul>
 
 
+
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+<!--endcontainer -->
